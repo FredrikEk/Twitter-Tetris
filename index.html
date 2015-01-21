@@ -32,37 +32,36 @@
       <p><canvas id="upcoming"></canvas></p>
       <p>score <span id="score">00000</span></p>
       <p>rows <span id="rows">0</span></p>
-    </div>
+      <p>
+        <a class="twitter-timeline" 
+        href="https://twitter.com/hashtag/test" 
+        data-widget-id="557906727610626048"
+        width="380"
+        height="410">
+        #test Tweets
+        </a>
 
+        <script>
+          !function(d, s, id) {
+            var js;
+            var fjs = d.getElementsByTagName(s)[0]; 
+            var p   = /^http:/.test(d.location)?'http':'https'; 
+
+            if(!d.getElementById(id)){
+              js     = d.createElement(s);
+              js.id  = id;
+              js.src = p + "://platform.twitter.com/widgets.js";
+              fjs.parentNode.insertBefore(js, fjs);
+            }
+          }(document,"script","twitter-wjs");
+        </script>
+      </p>
+    </div>
     <canvas id="canvas">
       Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
     </canvas>
   </div>
 
-  <div id="Twitter_Flow">
-    <a class="twitter-timeline" 
-      href="https://twitter.com/hashtag/test" 
-      data-widget-id="557906727610626048"
-      width="400"
-      height="500">
-      #test Tweets
-    </a>
-
-    <script>
-      !function(d, s, id) {
-        var js;
-        var fjs = d.getElementsByTagName(s)[0]; 
-        var p   = /^http:/.test(d.location)?'http':'https'; 
-
-        if(!d.getElementById(id)){
-          js     = d.createElement(s);
-          js.id  = id;
-          js.src = p + "://platform.twitter.com/widgets.js";
-          fjs.parentNode.insertBefore(js, fjs);
-        }
-      }(document,"script","twitter-wjs");
-    </script>
-    </div>
 
 
 
