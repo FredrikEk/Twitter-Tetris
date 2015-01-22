@@ -34,27 +34,24 @@
       <p>rows <span id="rows">0</span></p>
       <p>
         <a class="twitter-timeline" 
-        href="https://twitter.com/hashtag/test" 
-        data-widget-id="557906727610626048"
+        href="https://twitter.com/hashtag/datatjej2015" 
+        data-widget-id="557906727610626048">
         width="350"
         height="350">
-        #test Tweets
-        </a>
-
+        #datatjej2015 Tweets</a>
         <script>
-          !function(d, s, id) {
-            var js;
-            var fjs = d.getElementsByTagName(s)[0]; 
-            var p   = /^http:/.test(d.location)?'http':'https'; 
+        !function(d,s,id){
+          var js;
+          var fjs = d.getElementsByTagName(s)[0];
+          var p   = /^http:/.test(d.location)?'http':'https';
 
-            if(!d.getElementById(id)){
-              js     = d.createElement(s);
-              js.id  = id;
-              js.src = p + "://platform.twitter.com/widgets.js";
-              fjs.parentNode.insertBefore(js, fjs);
-            }
-          }(document,"script","twitter-wjs");
-        </script>
+          if(!d.getElementById(id)){
+            js     = d.createElement(s);
+            js.id  = id;
+            js.src = p + "://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js,fjs);
+          }
+        }(document,"script","twitter-wjs");</script>
       </p>
     </div>
     <canvas id="canvas">
@@ -62,9 +59,7 @@
     </canvas>
   </div>
 
-
-
-
+  <script src="jquery-2.1.3.js"></script>
   <script src="stats.js"></script>
   <script>
 
@@ -90,6 +85,29 @@
                                        window.setTimeout(callback, 1000 / 60);
                                      }
     }
+
+    //----------------------------------------------------------
+    //Extract tweet info from the basic Twitter timeline widget.
+    //----------------------------------------------------------
+
+    function() {
+      $.getJSON("http://cdn.syndication.twimg.com/widgets/timelines/557906727610626048?dnt=true&domain=unquietcode.com&lang=en&callback=?", function(data) {
+        var tweets = $(data.body).find('li.tweet');
+        Tweets = [];
+
+      for (var i=0; i < tweets.length; ++i) {
+          var cur = $(tweets[i]);         
+          var tweet = {};
+          tweet.authorFullName = cur.find("span.full-name span.p-name").html();
+          tweet.authorUserName = cur.find("span.p-nickname b").html();
+          tweet.date = cur.find("a.u-url").attr("data-datetime");
+          tweet.id = cur.attr("data-tweet-id");
+          tweet.text = $.trim(cur.find("p.e-entry-title").html());
+
+          Tweets.push(tweet);
+      }
+      });
+    });
 
 
     //-------------------------------------------------------------------------
