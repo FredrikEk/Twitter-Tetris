@@ -90,7 +90,7 @@
     //Extract tweet info from the basic Twitter timeline widget.
     //----------------------------------------------------------
 
-    function() {
+    $(function() {
       $.getJSON("http://cdn.syndication.twimg.com/widgets/timelines/557906727610626048?dnt=true&domain=unquietcode.com&lang=en&callback=?", function(data) {
         var tweets = $(data.body).find('li.tweet');
         Tweets = [];
