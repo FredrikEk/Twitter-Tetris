@@ -33,7 +33,8 @@
       <p>score <span id="score">00000</span></p>
       <p>rows <span id="rows">0</span></p>
       <p>
-        <a class="twitter-timeline" 
+      <!-- Datatjej2015 Widget-->
+      <!-- <a class="twitter-timeline" 
         href="https://twitter.com/hashtag/datatjej2015" 
         data-widget-id="557906727610626048">
         width="350"
@@ -52,6 +53,28 @@
             fjs.parentNode.insertBefore(js,fjs);
           }
         }(document,"script","twitter-wjs");</script>
+      -->
+        <!-- Test Widget-->
+        <a class="twitter-timeline" 
+          href="https://twitter.com/hashtag/testtesttest123" 
+          data-widget-id="559296724741914624"
+          width="350"
+          height="350">
+          #testtesttest123 Tweets</a>
+
+        <script>!function(d,s,id){
+          var js;
+          var fjs = d.getElementsByTagName(s)[0];
+          var p   =/^http:/.test(d.location)?'http':'https';
+
+          if(!d.getElementById(id)){
+            js     = d.createElement(s);
+            js.id  = id;
+            js.src = p + "://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js,fjs);
+          }
+        }(document,"script","twitter-wjs");
+        </script>
       </p>
     </div>
     <canvas id="canvas">
@@ -89,9 +112,15 @@
     //----------------------------------------------------------
     //Extract tweet info from the basic Twitter timeline widget.
     //----------------------------------------------------------
+    //var b = setInterval("alert('run each 3 seconds')",3000);
 
-    $(function() {
-      $.getJSON("http://cdn.syndication.twimg.com/widgets/timelines/557906727610626048?dnt=true&domain=unquietcode.com&lang=en&callback=?", function(data) {
+    var getTweetz = function() {
+      //#Datatjej2015
+      //$.getJSON("http://cdn.syndication.twimg.com/widgets/timelines/557906727610626048?dnt=true&domain=unquietcode.com&lang=en&callback=?", function(data) {
+      
+      //Testwidget, #testtesttest123
+        $.getJSON("http://cdn.syndication.twimg.com/widgets/timelines/559296724741914624?dnt=true&domain=unquietcode.com&lang=en&callback=?", function(data) {
+
         var tweets = $(data.body).find('li.tweet');
         Tweets = [];
 
@@ -107,8 +136,12 @@
           Tweets.push(tweet);
       }
       });
-    });
+    };
 
+    //Run function getTweetz() every 1 seconds.
+    var b = setInterval("getTweetz()", 1000);
+    //To abort the interval use:
+    //clearInterval(b);
 
     //-------------------------------------------------------------------------
     // game constants
