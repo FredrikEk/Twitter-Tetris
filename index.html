@@ -109,40 +109,6 @@
                                      }
     }
 
-    //----------------------------------------------------------
-    //Extract tweet info from the basic Twitter timeline widget.
-    //----------------------------------------------------------
-    //var b = setInterval("alert('run each 3 seconds')",3000);
-
-    var getTweetz = function() {
-      //#Datatjej2015
-      //$.getJSON("http://cdn.syndication.twimg.com/widgets/timelines/557906727610626048?dnt=true&domain=unquietcode.com&lang=en&callback=?", function(data) {
-      
-      //Testwidget, #testtesttest123
-        $.getJSON("http://cdn.syndication.twimg.com/widgets/timelines/559296724741914624?dnt=true&domain=unquietcode.com&lang=en&callback=?", function(data) {
-
-        var tweets = $(data.body).find('li.tweet');
-        Tweets = [];
-
-      for (var i=0; i < tweets.length; ++i) {
-          var cur = $(tweets[i]);         
-          var tweet = {};
-          tweet.authorFullName = cur.find("span.full-name span.p-name").html();
-          tweet.authorUserName = cur.find("span.p-nickname b").html();
-          tweet.date = cur.find("a.u-url").attr("data-datetime");
-          tweet.id = cur.attr("data-tweet-id");
-          tweet.text = $.trim(cur.find("p.e-entry-title").html());
-
-          Tweets.push(tweet);
-      }
-      });
-    };
-
-    //Run function getTweetz() every 1 seconds.
-    var b = setInterval("getTweetz()", 1000);
-    //To abort the interval use:
-    //clearInterval(b);
-
     //-------------------------------------------------------------------------
     // game constants
     //-------------------------------------------------------------------------
@@ -198,6 +164,48 @@
     var s = { size: 3, blocks: [0x06C0, 0x8C40, 0x6C00, 0x4620], color: 'green'  };
     var t = { size: 3, blocks: [0x0E40, 0x4C40, 0x4E00, 0x4640], color: 'purple' };
     var z = { size: 3, blocks: [0x0C60, 0x4C80, 0xC600, 0x2640], color: 'red'    };
+
+    
+    //----------------------------------------------------------
+    //Extract tweet info from the basic Twitter timeline widget.
+    //----------------------------------------------------------
+    //var b = setInterval("alert('run each 3 seconds')",3000);
+
+    var getTweetz = function() {
+      //#Datatjej2015
+      //$.getJSON("http://cdn.syndication.twimg.com/widgets/timelines/557906727610626048?dnt=true&domain=unquietcode.com&lang=en&callback=?", function(data) {
+      
+      //Testwidget, #testtesttest123
+      $.getJSON("http://cdn.syndication.twimg.com/widgets/timelines/559296724741914624?dnt=true&domain=unquietcode.com&lang=en&callback=?", function(data) {
+
+        var tweets = $(data.body).find('li.tweet');
+        Tweets = [];
+
+        for (var i=0; i < tweets.length; ++i) {
+          var cur = $(tweets[i]);         
+          var tweet = {};
+          tweet.authorFullName = cur.find("span.full-name span.p-name").html();
+          tweet.authorUserName = cur.find("span.p-nickname b").html();
+          tweet.date = cur.find("a.u-url").attr("data-datetime");
+          tweet.id = cur.attr("data-tweet-id");
+          tweet.text = $.trim(cur.find("p.e-entry-title").html());
+
+          Tweets.push(tweet);
+          var command = tweet.text.toUpperCase();
+
+          if (command.indexOf("LEFT")        != -1) {move(DIR.LEFT);}
+          else if (command.indexOf("RIGHT")  != -1) {move(DIR.RIGHT);}
+          else if (command.indexOf("ROTATE") != -1) {rotate();}
+          else if (command.indexOf("DROP")   != -1) {drop();}
+        }
+      });
+    };
+
+    //Run function getTweetz() every 1 seconds.
+    var b = setInterval("getTweetz()", 1000);
+
+    //To abort the interval use:
+    //clearInterval(b);
 
     //------------------------------------------------
     // do the bit manipulation and iterate through each
